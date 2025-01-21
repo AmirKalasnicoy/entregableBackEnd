@@ -30,3 +30,24 @@ export const createUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteUser = async (req, res, next) => {
+  try {
+    const { uid } = req.params; 
+    const deletedUser = await usersManager.destroyOne(uid); 
+    res.status(200).json({ message: "User deleted successfully", deletedUser });
+  } catch (error) {
+    next(error); 
+  }
+};
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const { uid } = req.params; 
+    const updatedData = req.body; 
+    const updatedUser = await usersManager.updateOne(uid, updatedData); 
+    res.status(200).json({ message: "User updated successfully", updatedUser });
+  } catch (error) {
+    next(error); 
+  }
+};
