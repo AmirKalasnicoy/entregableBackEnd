@@ -4,14 +4,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start":"node ./index.js",
-    "dev":"node --watch ./index.js "
+    "start": "node ./index.js",
+    "dev": "node --watch ./index.js "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "@faker-js/faker": "^9.4.0",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0"
   }
 }

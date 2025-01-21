@@ -1,0 +1,9 @@
+[
+  {
+    "_id": "adcecef48c8fb9fd2db38fcf",
+    "title": "Nuevo producto",
+    "price": 150,
+    "stock": 30,
+    "category": "accesorios"
+  }
+]
