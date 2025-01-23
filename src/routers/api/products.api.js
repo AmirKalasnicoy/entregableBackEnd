@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from "../../controllers/products.controller.js";
+import { getAllProducts, getProductById, createProduct, updateOne, destroyOne } from "../../controllers/products.controller.js";
 import validateProduct from "../../middlewares/validate.products.js";
 const router = Router();
 
@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", getAllProducts); 
 router.get("/:pid", getProductById); 
 router.post("/", validateProduct, createProduct);
-router.put("/:pid", validateProduct, updateProduct);
-router.delete("/:pid", deleteProduct); 
+router.put("/:pid", updateOne);
+router.delete("/:pid", destroyOne); 
 
 export default router;

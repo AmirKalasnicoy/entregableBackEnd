@@ -12,13 +12,13 @@ export default class ProductsManager {
 
   async init() {
     try {
-      await fs.access(this.path); 
+      await fs.access(this.path);
       const data = await fs.readFile(this.path, "utf-8");
       if (!data.trim()) {
-        await fs.writeFile(this.path, JSON.stringify([])); 
+        await fs.writeFile(this.path, JSON.stringify([]));
       }
     } catch (error) {
-      await fs.writeFile(this.path, JSON.stringify([])); 
+      await fs.writeFile(this.path, JSON.stringify([]));
     }
   }
 
@@ -30,7 +30,7 @@ export default class ProductsManager {
       throw new Error(`Error reading file at ${this.path}: ${error.message}`);
     }
   }
-  
+
 
   async writeFile(data) {
     try {
@@ -48,7 +48,7 @@ export default class ProductsManager {
         title: faker.commerce.productName(),
         price: faker.commerce.price({ min: 10, max: 500, dec: 2 }),
         stock: faker.number.int({ min: 0, max: 1000 }),
-        photo: faker.image.url(),
+        thumbnails: Array.from({ length: 3 }, () => faker.image.url()),
         category: faker.helpers.arrayElement(["ninguna", "celulares", "computadoras", "accesorios"]),
       };
       const data = await this.readFile();
@@ -68,7 +68,11 @@ export default class ProductsManager {
       if (!data.price || typeof data.price !== "number") {
         throw new Error("Invalid or missing 'price'");
       }
-      const newProduct = { _id: faker.database.mongodbObjectId(), ...data };
+      const newProduct = {
+        _id: faker.database.mongodbObjectId(), ...data, thumbnails: data.thumbnails && Array.isArray(data.thumbnails) && data.thumbnails.length > 0
+          ? data.thumbnails
+          : ["https://p0.pikist.com/photos/833/895/kitty-cat-kitten-pet-animal-cute-feline-domestic-young.jpg"], 
+      }
       const dataOfFile = await this.readFile();
       dataOfFile.push(newProduct);
       await this.writeFile(dataOfFile);

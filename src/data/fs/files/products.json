@@ -1,9 +1,22 @@
 [
   {
-    "_id": "adcecef48c8fb9fd2db38fcf",
-    "title": "Nuevo producto",
-    "price": 150,
-    "stock": 30,
-    "category": "accesorios"
+    "_id": "bc0edbd5bcbbebc1bc2e4d3f",
+    "title": "motorola g203",
+    "price": 1200,
+    "stock": 50,
+    "category": "celulares",
+    "thumbnails": [
+      "https://p0.pikist.com/photos/833/895/kitty-cat-kitten-pet-animal-cute-feline-domestic-young.jpg"
+    ]
+  },
+  {
+    "_id": "085de5191b2be6ee250fbab2",
+    "title": "iPhone 16",
+    "price": 1200,
+    "stock": 50,
+    "category": "celulares",
+    "thumbnails": [
+      "https://p0.pikist.com/photos/833/895/kitty-cat-kitten-pet-animal-cute-feline-domestic-young.jpg"
+    ]
   }
 ]
