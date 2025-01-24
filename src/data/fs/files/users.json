@@ -5,5 +5,33 @@
     "password": "43211234",
     "age": 34,
     "name": "igna"
+  },
+  {
+    "_id": "ba0594cc14fedca3773ffa8d",
+    "email": "hola@coder.com",
+    "password": "12345",
+    "age": 24,
+    "name": "amir"
+  },
+  {
+    "_id": "3321c3e5aacd2da0e667eb7c",
+    "email": "holachau@coder.com",
+    "password": "12345",
+    "age": 22,
+    "name": "ivan"
+  },
+  {
+    "_id": "9cd11b5e0cc17551d3724c5e",
+    "email": "eduardo123@coder.com",
+    "password": "12345",
+    "age": 50,
+    "name": "eduardo"
+  },
+  {
+    "_id": "20ac7f8b3a319eefe4c1ce3d",
+    "email": "valeria321@coder.com",
+    "password": "12345",
+    "age": 18,
+    "name": "valeria"
   }
 ]
