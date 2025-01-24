@@ -1,7 +1,7 @@
 [
   {
-    "_id": "bc0edbd5bcbbebc1bc2e4d3f",
-    "title": "motorola g203",
+    "_id": "085de5191b2be6ee250fbab2",
+    "title": "!phone 11 mini",
     "price": 1200,
     "stock": 50,
     "category": "celulares",
@@ -10,10 +10,20 @@
     ]
   },
   {
-    "_id": "085de5191b2be6ee250fbab2",
-    "title": "iPhone 16",
-    "price": 1200,
+    "_id": "b49a590e76bae592a4628af4",
+    "title": "iPhone 16 PRO",
+    "price": 1500,
     "stock": 50,
+    "category": "celulares",
+    "thumbnails": [
+      "https://p0.pikist.com/photos/833/895/kitty-cat-kitten-pet-animal-cute-feline-domestic-young.jpg"
+    ]
+  },
+  {
+    "_id": "acf7f63a0ff0c660ce4fd612",
+    "title": "iPhone 12 PRO",
+    "price": 1100,
+    "stock": 20,
     "category": "celulares",
     "thumbnails": [
       "https://p0.pikist.com/photos/833/895/kitty-cat-kitten-pet-animal-cute-feline-domestic-young.jpg"
