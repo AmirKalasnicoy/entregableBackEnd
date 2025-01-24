@@ -5,7 +5,11 @@ const usersManager = new UsersManager();
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await usersManager.readAll();
-    res.status(200).json(users);
+    res.status(200).json({
+      status:200,
+      message:"All users retrieved successfully",
+      data:users
+    });
   } catch (error) {
     next(error);
   }
@@ -15,8 +19,18 @@ export const getUserById = async (req, res, next) => {
   try {
     const { uid } = req.params;
     const user = await usersManager.readOne(uid);
-    if (!user) throw new Error(`User with ID ${uid} not found`);
-    res.status(200).json(user);
+    if (!user) {
+      return res.status(404).json({
+        status:404,
+        message:`Users with ID ${uid} not found`,
+      })
+    }
+    res.status(200).json({
+      status:200,
+      message:"User retrieved successfully",
+      data:user
+    })
+  
   } catch (error) {
     next(error);
   }
@@ -25,9 +39,13 @@ export const getUserById = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
   try {
     const newUser = await usersManager.create(req.body);
-    res.status(201).json({ id: newUser._id });
+    res.status(201).json({ 
+      status:201,
+      message:"New user created successfully",
+      id: newUser._id 
+    });
   } catch (error) {
-    next(error); // Esto pasa el error al middleware de manejo de errores
+    next(error); 
   }
 };
 
@@ -47,7 +65,17 @@ export const updateUser = async (req, res, next) => {
     const { uid } = req.params; 
     const updatedData = req.body; 
     const updatedUser = await usersManager.updateOne(uid, updatedData); 
-    res.status(200).json({ message: "User updated successfully", updatedUser });
+    if (!updateUser){
+      return res.status(404).json({
+        status:404,
+        message:`User with ID ${uid} not found`,
+      })
+    }
+    res.status(200).json({
+      status:200,
+      message:"User update successfully",
+      data:updatedUser
+    })
   } catch (error) {
     next(error); 
   }
