@@ -1,6 +1,6 @@
 const validateProduct = (req, res, next) => {
   const { title, price, stock, category } = req.body;
-
+  try{
   if (!title || typeof title !== "string") {
     return res.status(400).json({ error: "Invalid or missing 'title'" });
   }
@@ -14,6 +14,10 @@ const validateProduct = (req, res, next) => {
     return res.status(400).json({ error: "Invalid or missing 'category'" });
   }
   next();
+  }
+  catch(error){
+    next(error);
+  }
 };
 
 export default validateProduct;

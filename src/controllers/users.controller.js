@@ -4,7 +4,7 @@ const usersManager = new UsersManager();
 
 export const getAllUsers = async (req, res, next) => {
   try {
-    const users = await usersManager.read();
+    const users = await usersManager.readAll();
     res.status(200).json(users);
   } catch (error) {
     next(error);
@@ -27,9 +27,10 @@ export const createUser = async (req, res, next) => {
     const newUser = await usersManager.create(req.body);
     res.status(201).json({ id: newUser._id });
   } catch (error) {
-    next(error);
+    next(error); // Esto pasa el error al middleware de manejo de errores
   }
 };
+
 
 export const deleteUser = async (req, res, next) => {
   try {

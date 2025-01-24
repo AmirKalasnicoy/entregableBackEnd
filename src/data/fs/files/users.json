@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "_id": "a3af6cc2abb13fd48efcecd1",
+    "email": "hola@coder.com",
+    "password": "4321",
+    "age": 24,
+    "name": "amir"
+  }
+]
