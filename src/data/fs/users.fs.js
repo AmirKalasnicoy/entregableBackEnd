@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import fs from "fs/promises";
 import path from "path";
 
-const filePath = path.resolve("src/data/fs/files/users.json");
+const filePath = path.resolve("./src/data/fs/files/users.json");
 
 export default class UsersManager {
   constructor() {

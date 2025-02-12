@@ -33,5 +33,11 @@
     "password": "12345",
     "age": 18,
     "name": "valeria"
+  },
+  {
+    "_id": "ea7f3f903c867b9ae8bd1cca",
+    "email": "holanda@coder.com.ar",
+    "password": "123456789",
+    "avatar": "https://images.hdqwalls.com/wallpapers/lionel-messi-fifa-world-cup-qatar-4k-mu.jpg"
   }
 ]

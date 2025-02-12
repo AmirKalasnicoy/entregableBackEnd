@@ -4,7 +4,7 @@ import path from "path";
 
 const filePath = path.resolve("src/data/fs/files/products.json");
 
-export default class ProductsManager {
+class ProductsManager {
   constructor() {
     this.path = filePath;
     this.init();
@@ -131,3 +131,4 @@ export default class ProductsManager {
     }
   }
 }
+export default ProductsManager;
