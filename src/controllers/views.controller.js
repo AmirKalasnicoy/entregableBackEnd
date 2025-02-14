@@ -62,5 +62,17 @@ const indexView = async (req, res, next) => {
       next(error);
     }
   }
+  const realProductsView = async (req, res, next) => {
+    try {
+      const products = await productsManager.readAll();
+      const data = {
+        title: "Real-Time Products",
+        products,
+      };
+      return res.status(200).render("realProducts", data);
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  export { indexView, productView, cartView, profileView ,registerView}; 
+  export { indexView, productView, cartView, profileView ,registerView,realProductsView}; 
