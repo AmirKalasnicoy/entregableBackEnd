@@ -378,5 +378,15 @@
     "thumbnails": [
       "https://eshop.hkcsl.com/on/demandware.static/-/Sites-master-hkt-hk/default/dw0bc3f8e7/images/2633971scol/2633971_motorazr40ultra.jpg"
     ]
+  },
+  {
+    "_id": "ff6dfafd7dfab1de5e46cfe0",
+    "title": "Redmi 13C Azul 128 Gb - XIAOMI",
+    "price": 10000,
+    "stock": 2,
+    "category": "celulares",
+    "thumbnails": [
+      "https://th.bing.com/th/id/OIP.cWP67RqS3KaDgskIGl5qHAHaE6?rs=1&pid=ImgDetMain"
+    ]
   }
 ]
