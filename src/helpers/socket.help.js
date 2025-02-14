@@ -20,7 +20,6 @@ async function socketHelper(socket) {
   socket.on("new user", async (data) => {
     await usersManager.create(data);
     const users = await usersManager.readAll();
-    /* socketServer emite a TODOS los sockets */
     socketServer.emit("users", users);
   });
 
