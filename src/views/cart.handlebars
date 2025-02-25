@@ -1,1 +1,17 @@
-<h1 class="text-primary">Vista del carrito</h1>
+<div class="container">
+    <h1 class="title">Mi Carrito</h1>
+
+    {{#if cartEmpty}}
+        <p>Tu carrito está vacío.</p>
+    {{else}}
+        <div class="cart-list">
+            {{#each products}}
+                <div class="cart-item">
+                    <h3>{{title}}</h3>
+                    <p>Precio: USD {{price}}</p>
+                    <p>Cantidad: {{quantity}}</p>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>

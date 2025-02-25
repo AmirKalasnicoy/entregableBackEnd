@@ -1,10 +1,9 @@
-import ProductsManager from "../data/fs/products.fs.js";
+import ProductsManager from "../data/mongo/products.mongo.js";
 
-const productsManager = new ProductsManager();
 
-export const getAllProducts = async (req, res, next) => {
+const getAllProducts = async (req, res, next) => {
   try {
-    const products = await productsManager.readFile();
+    const products = await ProductsManager.readFile();
     res.status(200).json({
       status:200,
       message:"Products retrived successfully",
@@ -15,10 +14,10 @@ export const getAllProducts = async (req, res, next) => {
   }
 };
 
-export const getProductById = async (req, res, next) => {
+const getProductById = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const product = await productsManager.readOne(pid);
+    const product = await ProductsManager.readOne(pid);
     if (!product) {
       res.status(404).json({
         status: 404,
@@ -36,9 +35,9 @@ export const getProductById = async (req, res, next) => {
   }
 };
 
-export const createProduct = async (req, res, next) => {
+const createProduct = async (req, res, next) => {
   try {
-    const newProduct = await productsManager.create(req.body);
+    const newProduct = await ProductsManager.create(req.body);
     res.status(201).json({
       status:201,
       message:"Product created successfully",
@@ -49,10 +48,10 @@ export const createProduct = async (req, res, next) => {
   }
 };
 
-export const updateOne = async (req, res, next) => {
+const updateOne = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    const updatedProduct = await productsManager.updateOne(pid, req.body);
+    const updatedProduct = await ProductsManager.updateOne(pid, req.body);
     res.status(200).json({
       status:200,
       message:"Product updated successfully",
@@ -63,10 +62,10 @@ export const updateOne = async (req, res, next) => {
   }
 };
 
-export const destroyOne = async (req, res, next) => {
+const destroyOne = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    await productsManager.destroyOne(pid);
+    await ProductsManager.destroyOne(pid);
     res.status(200).json({ 
       status:200,
       message:"Product deleted successfully",
@@ -76,3 +75,4 @@ export const destroyOne = async (req, res, next) => {
     next(error);
   }
 };
+export {getAllProducts,getProductById,createProduct,updateOne,destroyOne}

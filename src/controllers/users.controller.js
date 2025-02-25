@@ -1,10 +1,9 @@
-import UsersManager from "../data/fs/users.fs.js";
+import UsersManager from "../data/mongo/users.mongo.js";
 
-const usersManager = new UsersManager();
 
-export const getAllUsers = async (req, res, next) => {
+const getAllUsers = async (req, res, next) => {
   try {
-    const users = await usersManager.readAll();
+    const users = await UsersManager.readAll();
     res.status(200).json({
       status:200,
       message:"All users retrieved successfully",
@@ -15,10 +14,10 @@ export const getAllUsers = async (req, res, next) => {
   }
 };
 
-export const getUserById = async (req, res, next) => {
+const getUserById = async (req, res, next) => {
   try {
     const { uid } = req.params;
-    const user = await usersManager.readOne(uid);
+    const user = await UsersManager.readOne(uid);
     if (!user) {
       return res.status(404).json({
         status:404,
@@ -35,10 +34,9 @@ export const getUserById = async (req, res, next) => {
     next(error);
   }
 };
-
-export const createUser = async (req, res, next) => {
+ const createUser = async (req, res, next) => {
   try {
-    const newUser = await usersManager.create(req.body);
+    const newUser = await UsersManager.create(req.body);
     res.status(201).json({ 
       status:201,
       message:"New user created successfully",
@@ -50,21 +48,21 @@ export const createUser = async (req, res, next) => {
 };
 
 
-export const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   try {
     const { uid } = req.params; 
-    const deletedUser = await usersManager.destroyOne(uid); 
+    const deletedUser = await UsersManager.destroyOne(uid); 
     res.status(200).json({ message: "User deleted successfully", deletedUser });
   } catch (error) {
     next(error); 
   }
 };
 
-export const updateUser = async (req, res, next) => {
+const updateUser = async (req, res, next) => {
   try {
     const { uid } = req.params; 
     const updatedData = req.body; 
-    const updatedUser = await usersManager.updateOne(uid, updatedData); 
+    const updatedUser = await UsersManager.updateOne(uid, updatedData); 
     if (!updateUser){
       return res.status(404).json({
         status:404,
@@ -80,3 +78,5 @@ export const updateUser = async (req, res, next) => {
     next(error); 
   }
 };
+
+export{getAllUsers,getUserById,createUser,deleteUser,updateUser}
