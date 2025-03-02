@@ -54,6 +54,30 @@ const updateQuantity = async (req, res, next) => {
     next(error);
   }
 };
+const updateState = async (req, res, next) => {
+  try {
+    const { cart_id, state } = req.params;
+    const states = ["reserved", "paid", "delivered"];
+    if (states.includes(state)) {
+      const one = await cartsManager.updateState(cart_id, state);
+      if (one) {
+        return res.status(200).json({
+          method: req.method,
+          url: req.url,
+          response: one,
+        });
+      }
+      const error = new Error("Not Found!");
+      error.statusCode = 404;
+      throw error;
+    }
+    const error = new Error("Invalid state!");
+    error.statusCode = 400;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
 const removeProductFromCart = async (req, res, next) => {
   try {
     const { cart_id } = req.params;
@@ -72,10 +96,18 @@ const removeProductFromCart = async (req, res, next) => {
     next(error);
   }
 };
-
-export {
-  addProductToCart,
-  readProductsFromUser,
-  updateQuantity,
-  removeProductFromCart,
+const totalToPay = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const total = await cartsManager.totalToPay(user_id);
+    return res.status(200).json({
+      method: req.method,
+      url: req.url,
+      response: total,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
+
+export { addProductToCart, readProductsFromUser, updateQuantity, updateState, removeProductFromCart, totalToPay };

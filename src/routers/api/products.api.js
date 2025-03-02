@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { getAllProducts, getProductById, createProduct, updateOne, destroyOne } from "../../controllers/products.controller.js";
-import validateProduct from "../../middlewares/validate.products.js";
-const router = Router();
+import { create, read, readById, updateById, destroyById, paginate } from "../../controllers/products.controller.js";
 
-// Rutas de productos
-router.get("/", getAllProducts); 
-router.get("/:pid", getProductById); 
-router.post("/", validateProduct, createProduct);
-router.put("/:pid", updateOne);
-router.delete("/:pid", destroyOne); 
+const productsRouter = Router();
 
-export default router;
+productsRouter.post("/", create);
+productsRouter.get("/", read);
+productsRouter.get("/pages", paginate);
+productsRouter.get("/:product_id", readById);
+productsRouter.put("/:product_id", updateById);
+productsRouter.delete("/:product_id", destroyById);
+
+export default productsRouter;

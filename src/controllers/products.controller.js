@@ -1,78 +1,103 @@
-import ProductsManager from "../data/mongo/products.mongo.js";
+import productsManager from "../data/mongo/products.mongo.js";
 
-
-const getAllProducts = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
-    const products = await ProductsManager.readFile();
-    res.status(200).json({
-      status:200,
-      message:"Products retrived successfully",
-      data:products
-    })
+    const data = req.body;
+    const one = await productsManager.create(data);
+    return res.status(201).json({
+      method: req.method,
+      url: req.url,
+      response: one,
+    });
   } catch (error) {
     next(error);
   }
 };
-
-const getProductById = async (req, res, next) => {
+const read = async (req, res, next) => {
   try {
-    const { pid } = req.params;
-    const product = await ProductsManager.readOne(pid);
-    if (!product) {
-      res.status(404).json({
-        status: 404,
-        message: "Product not found",
-      });
-    } else {
-      res.status(200).json({
-        status: 200,
-        message: "Product retrieved successfully",
-        data: product,
+    const filter = req.query;
+    const all = await productsManager.read(filter);
+    if (all.length > 0) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: all,
       });
     }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
   } catch (error) {
     next(error);
   }
 };
-
-const createProduct = async (req, res, next) => {
+const readById = async (req, res, next) => {
   try {
-    const newProduct = await ProductsManager.create(req.body);
-    res.status(201).json({
-      status:201,
-      message:"Product created successfully",
-       id: newProduct._id 
+    const { product_id } = req.params;
+    const one = await productsManager.readById(product_id);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
       });
+    }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+const updateById = async (req, res, next) => {
+  try {
+    const { product_id } = req.params;
+    const data = req.body;
+    const one = await productsManager.updateById(product_id, data);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
+      });
+    }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+const destroyById = async (req, res, next) => {
+  try {
+    const { product_id } = req.params;
+    const one = await productsManager.destroyById(product_id);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
+      });
+    }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+const paginate = async (req, res, next) => {
+  try {
+    const { page = 1, limit = 5, ...filter } = req.query;
+    const { docs, prevPage, nextPage } = await productsManager.paginate(page, limit, filter);
+    return res.status(200).json({
+      method: req.method,
+      url: req.url,
+      response: { docs, prevPage, nextPage },
+    });
   } catch (error) {
     next(error);
   }
 };
 
-const updateOne = async (req, res, next) => {
-  try {
-    const { pid } = req.params;
-    const updatedProduct = await ProductsManager.updateOne(pid, req.body);
-    res.status(200).json({
-      status:200,
-      message:"Product updated successfully",
-      data:updatedProduct
-    })
-  } catch (error) {
-    next(error);
-  }
-};
-
-const destroyOne = async (req, res, next) => {
-  try {
-    const { pid } = req.params;
-    await ProductsManager.destroyOne(pid);
-    res.status(200).json({ 
-      status:200,
-      message:"Product deleted successfully",
-      id: pid
-     });
-  } catch (error) {
-    next(error);
-  }
-};
-export {getAllProducts,getProductById,createProduct,updateOne,destroyOne}
+export { create, read, readById, updateById, destroyById, paginate };

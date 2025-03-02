@@ -1,13 +1,10 @@
-<div class="container">
-    <h1 class="title">Perfil de Usuario</h1>
-
-    {{#if notFound}}
-        <p>Usuario no encontrado.</p>
-    {{else}}
-        <div class="profile-card">
-            <h2>{{name}}</h2>
-            <p>Email: {{email}}</p>
-            <p>Rol: {{role}}</p>
-        </div>
-    {{/if}}
-</div>
+<main class="d-flex flex-column align-items-center w-100 flex-grow-1">
+  <h1 class="bg-success-subtle p-2 text-center text-success w-100">MY PROFILE</h1>
+  <section class="m-3 d-flex flex-column justify-content-evenly flex-wrap align-items-center" style="width: 380px;">
+    <p class="card-title py-1 text-center w-100">{{profile.name}}</p>
+    <p class="card-title py-1 text-center w-100">{{profile.email}}</p>
+    <p class="card-title py-1 text-center w-100">{{profile.date}}</p>
+    <img class="w-100" src={{profile.avatar}} />
+  </section>
+</main>
+<script src="/scripts/register.js"></script>

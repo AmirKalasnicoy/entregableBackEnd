@@ -1,82 +1,108 @@
-import UsersManager from "../data/mongo/users.mongo.js";
+import usersManager from "../data/mongo/users.mongo.js";
 
-
-const getAllUsers = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
-    const users = await UsersManager.readAll();
-    res.status(200).json({
-      status:200,
-      message:"All users retrieved successfully",
-      data:users
+    const data = req.body;
+    const one = await usersManager.create(data);
+    return res.status(201).json({
+      method: req.method,
+      url: req.url,
+      response: one,
     });
   } catch (error) {
     next(error);
   }
 };
-
-const getUserById = async (req, res, next) => {
+const read = async (req, res, next) => {
   try {
-    const { uid } = req.params;
-    const user = await UsersManager.readOne(uid);
-    if (!user) {
-      return res.status(404).json({
-        status:404,
-        message:`Users with ID ${uid} not found`,
-      })
+    const filter = req.query;
+    const all = await usersManager.read(filter);
+    if (all.length > 0) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: all,
+      });
     }
-    res.status(200).json({
-      status:200,
-      message:"User retrieved successfully",
-      data:user
-    })
-  
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
   } catch (error) {
     next(error);
   }
 };
- const createUser = async (req, res, next) => {
+const readById = async (req, res, next) => {
   try {
-    const newUser = await UsersManager.create(req.body);
-    res.status(201).json({ 
-      status:201,
-      message:"New user created successfully",
-      id: newUser._id 
-    });
-  } catch (error) {
-    next(error); 
-  }
-};
-
-
-const deleteUser = async (req, res, next) => {
-  try {
-    const { uid } = req.params; 
-    const deletedUser = await UsersManager.destroyOne(uid); 
-    res.status(200).json({ message: "User deleted successfully", deletedUser });
-  } catch (error) {
-    next(error); 
-  }
-};
-
-const updateUser = async (req, res, next) => {
-  try {
-    const { uid } = req.params; 
-    const updatedData = req.body; 
-    const updatedUser = await UsersManager.updateOne(uid, updatedData); 
-    if (!updateUser){
-      return res.status(404).json({
-        status:404,
-        message:`User with ID ${uid} not found`,
-      })
+    const { user_id } = req.params;
+    const one = await usersManager.readById(user_id);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
+      });
     }
-    res.status(200).json({
-      status:200,
-      message:"User update successfully",
-      data:updatedUser
-    })
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
   } catch (error) {
-    next(error); 
+    next(error);
+  }
+};
+const updateById = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const data = req.body;
+    const one = await usersManager.updateById(user_id, data);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
+      });
+    }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+const destroyById = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    const one = await usersManager.destroyById(user_id);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one,
+      });
+    }
+    const error = new Error("Not found");
+    error.statusCode = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const one = await usersManager.login(email, password);
+    if (one) {
+      return res.status(200).json({
+        method: req.method,
+        url: req.url,
+        response: one._id,
+      });
+    }
+    const error = new Error("Invalid credentials");
+    error.statusCode = 401;
+    throw error;
+  } catch (error) {
+    next(error);
   }
 };
 
-export{getAllUsers,getUserById,createUser,deleteUser,updateUser}
+export { create, read, readById, updateById, destroyById, login };

@@ -15,19 +15,25 @@ class CartsManager extends Manager {
   };
 
   readProductsFromUser = async (user_id) => {
-      try {
-          const objectId = new mongoose.Types.ObjectId(user_id); 
-          const all = await this.read({ user: objectId, state: "reserved" }).populate("products.product");
-          return all;
-      } catch (error) {
-          console.error("Error en readProductsFromUser:", error);
-          throw error;
-      }
+    try {
+      const all = await this.read({ user_id, state: "reserved" });
+      return all;
+    } catch (error) {
+      throw error;
+    }
   };
-  
+
   updateQuantity = async (cart_id, quantity) => {
     try {
       const one = await this.updateById(cart_id, { quantity });
+      return one;
+    } catch (error) {
+      throw error;
+    }
+  };
+  updateState = async (cart_id, state) => {
+    try {
+      const one = await this.updateById(cart_id, { state });
       return one;
     } catch (error) {
       throw error;
@@ -42,6 +48,7 @@ class CartsManager extends Manager {
     }
   };
 }
+
 
 const cartsManager = new CartsManager();
 export default cartsManager;
