@@ -27,6 +27,6 @@ async function socketHelper(socket) {
       const products = await ProductsManager.read();
       socket.emit("products", products);
     });
+    
 }
-
 export default socketHelper;

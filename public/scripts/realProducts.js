@@ -7,7 +7,7 @@ socket.on("products", (data) => {
     .map(
       (each) => `
         <article class="card my-2" style="width: 18rem;">
-            <img src="${each.thumbnails ? each.thumbnails[0] : 'https://cdn-icons-png.flaticon.com/512/147/147142.png'}" class="card-img-top" alt="${each._id}" style="height: 18rem; object-fit: cover">
+             <img src="${each.thumbnails ? each.thumbnails[0] : 'https://cdn-icons-png.flaticon.com/512/147/147142.png'}" class="card-img-top" alt="${each._id}" style="height: 18rem; object-fit: cover">
             <div class="card-body">
                 <h5 class="card-title">${each.title}</h5>
                 <p class="card-text">USD ${each.price}</p>
