@@ -84,6 +84,6 @@ class CartsManager extends Manager {
   };
 }
 
-// Exportamos la clase correctamente
+
 const cartsManager = new CartsManager();
 export default cartsManager;

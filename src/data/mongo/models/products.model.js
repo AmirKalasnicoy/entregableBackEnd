@@ -2,12 +2,12 @@ import { Schema, Types, model } from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 const collection = "products";
-// products.model.js
+
 const schema = new Schema(
   {
     title: { type: String, required: true, index: true },
     description: { type: String },
-    category: { type: String, default: "Laptops", enum: [/* ... */], index: true },
+    category: { type: String, default: "Laptops", enum: ["Laptops", "Smartphones", "Tablets", "Accessories", "Monitors","Graphic geforce","Graphic AMD","Intel processor","AMD processor"] , index: true },
     thumbnails: { 
       type: [String], 
       default: ["https://www.shutterstock.com/image-vector/missing-picture-page-website-design-600nw-1552421075.jpg"] 
