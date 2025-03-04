@@ -1,51 +1,54 @@
-# CoderCommerce API 
-## Description
-Este proyecto es una API REST para la gestión de productos y usuarios. Permite crear, leer, actualizar y eliminar recursos, almacenando los datos en archivos JSON utilizando Node.js.
-## Requisitos
-1. Node.js (v16 o superior)
-2. Postman para probar las API.
-3. Ejecutar `npm install` para instalar las dependencias necesarias.
+# 🛒 CoderCommerce - Backend de E-commerce
 
-## Endpoints Products
-1. GET : /api/products  -> Obtener todos los productos
-2. GET : /api/products/:pid ->Obtener un producto por ID
-3. POST: /api/products -> 	Crear un nuevo producto
-4. PUT: /api/products/:pid -> Actualizar un producto por ID
-5. DELETE: /api/products/:pid -> Eliminar un producto por ID
+Este es el backend de un e-commerce desarrollado con **Node.js, Express y MongoDB**.  
+Permite la gestión de usuarios, productos y carritos de compra, integrando autenticación, WebSockets y persistencia en MongoDB.
 
-## Endpoints para Usuarios
-1. GET : /api/users  -> Obtener todos los usuarios
-2. GET : /api/users/:uid ->Obtener un usuarios por ID
-3. POST: /api/users -> 	Crear un nuevo usuario
-4. PUT: /api/users/:uid -> Actualizar un usuario por ID
-5. DELETE: /api/users/:uid -> Eliminar un usuario por ID
+---
 
-## Instrucciones para Ejecutar
-1. Clonar el repositorio.
-2. Ejecutar el servidor con: npm start 
+## 🚀 **Tecnologías utilizadas**
+- **Node.js** + **Express** 🚀 (Servidor y API REST)
+- **MongoDB + Mongoose** 🛢️ (Base de datos)
+- **Handlebars** 🖥️ (Motores de plantillas para las vistas)
+- **WebSockets** 🔄 (Actualización en tiempo real de productos)
+- **Dotenv** 🔐 (Manejo de variables de entorno)
+- **Express-session** (Gestión de sesiones de usuario)
+- **Bootstrap 5** (Estilos y diseño responsivo)
 
-## Códigos de Estado
-- `200 OK`: Operación exitosa.
-- `201 Created`: Recurso creado exitosamente.
-- `404 Not Found`: Recurso no encontrado.
-- `500 Internal Server Error`: Error en el servidor.
+## 📌 Endpoints disponibles
+## 👤 Users
+**POST** `/api/users` - Registrar un usuario
+**POST** `/api/users/login` - Iniciar sesión
+**GET** `/api/users` - Listar todos los usuarios
+**GET** `/api/users/:user_id` - Obtener un usuario por ID
+**PUT** `/api/users/:user_id` - Actualizar un usuario
+**DELETE** `/api/users/:user_id` - Eliminar un usuario
 
-## Ejemplo de JSON
+## 📦 Products
+**POST**	`/api/products`	Crear un nuevo producto
+**GET**	`/api/products`	Listar todos los productos
+**GET**	`/api/products/pages`	Paginación de productos
+**GET**	`/api/products/:product_id`	Obtener un producto por ID
+**PUT**	`/api/products/:product_id`	Actualizar un producto
+**DELETE**	`/api/products/:product_id`	Eliminar un producto
+## 🛒 Carritos
+**POST**	`/api/carts`	Agregar un producto al carrito
+**GET**	`/api/carts/users/:user_id`	Ver productos en el carrito de un usuario
+**PUT**	`/api/carts/:cart_id`	Actualizar cantidad de un producto en el carrito
+**DELETE**	`/api/carts/:cart_id`	Eliminar un producto del carrito
+**GET**	`/api/carts/total/:user_id`	Calcular total del carrito
 
-## Products
-{
-  "title": "Laptop",
-  "category": "computers",
-  "price": 1200,
-  "stock": 10,
-  "thumbnails": ["https://example.com/image1.jpg"] 
-}
-Nota: Si no incluyes una imagen, se generará una por defecto.
+## 📷 Vistas con Handlebars
+**`/`** - `index.handlebars` - Página principal con productos
+**`/login`** - `login.handlebars` - Página de inicio de sesión
+**`/register`** - `register.handlebars` - Registro de usuario
+**`/cart/:user_id`** - `cart.handlebars` - Carrito del usuario
+**`/products`** - `products.handlebars` - Gestión de productos
+**`/profile/:user_id`** - `profile.handlebars` - Perfil del usuario
 
-## Users
-{
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "password": "securepassword123",
-  "age": 30
-}
+## 🚀 Funcionalidades principales
+✅ CRUD de productos, usuarios y carritos  
+✅ Login básico con localStorage  
+✅ Conexión con MongoDB usando Mongoose  
+✅ Vistas dinámicas con Handlebars  
+✅ WebSockets para actualizar productos en tiempo real  
+✅ Diseño responsivo con Bootstrap 5  
